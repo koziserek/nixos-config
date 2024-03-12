@@ -90,4 +90,7 @@ firefox
 
   # Music and entertainment
   spotify
+
+  # VR
+  immersed-vr
 ]

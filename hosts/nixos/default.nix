@@ -20,9 +20,9 @@ let user = "jakub";
       };
       efi.canTouchEfiVariables = true;
     };
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "uinput" ];
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "v4l2loopback" ];
+    kernelModules = [ "uinput" "v4l2loopback" ];
+    extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
   };
 
   # Set your time zone.
@@ -88,8 +88,10 @@ let user = "jakub";
       libinput.enable = true;
 
       # Turn Caps Lock into Ctrl
-      layout = "us";
-      xkbOptions = "ctrl:nocaps";
+      xkb = {
+        layout = "us";
+        options = "ctrl:nocaps";
+      };
     };
 
     # Enable CUPS to print documents
@@ -317,6 +319,8 @@ hardware = {
   environment.systemPackages = with pkgs; [
     agenix.packages."${pkgs.system}".default # "x86_64-linux"
     gitAndTools.gitFull
+    linuxPackages.v4l2loopback
+    v4l-utils
     inetutils
   ];
 
