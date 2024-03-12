@@ -38,15 +38,15 @@ with pkgs; [
   #flyctl
   #google-cloud-sdk
   go
-  gopls
-  ngrok
+  #gopls
+  #ngrok
   ssm-session-manager-plugin
   #terraform
   #terraform-ls
   #tflint
 
   # Media-related packages
-  emacs-all-the-icons-fonts
+  #emacs-all-the-icons-fonts
   imagemagick
   dejavu_fonts
   ffmpeg
