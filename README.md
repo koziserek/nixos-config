@@ -43,15 +43,17 @@ Check out the starter templates and step-by-step commands below to get started!
 - [Deploying Changes to Your System](#deploying-changes-to-your-system)
   - [For all platforms](#for-all-platforms)
   - [Update Dependencies](#update-dependencies)
-- [Compatibility and Testing](#compatibility-and-testing)
-- [Contributing](#contributing)
-- [Feedback and Questions](#feedback-and-questions)
-- [License](#license)
+- [Compatibility and Feedback](#compatibility-and-feedback)
+  - [Platforms](#platforms)
+  - [Contributing](#contributing)
+  - [Feedback and Questions](#feedback-and-questions)
+  - [License](#license)
 - [Appendix](#appendix)
   - [Why Nix Flakes](#why-nix-flakes)
   - [NixOS Components](#nixos-components)
-  - [Stars](#stars)
   - [Support](#support)
+  - [Stars](#stars)
+
 
 ## Layout
 ```
@@ -193,7 +195,6 @@ You can search for packages on the [official NixOS website](https://search.nixos
 
 * [`modules/darwin/casks.nix`](https://github.com/dustinlyons/nixos-config/blob/main/modules/darwin/casks.nix)
 * [`modules/darwin/packages.nix`](https://github.com/dustinlyons/nixos-config/blob/main/modules/darwin/packages.nix)
-* [ `modules/nixos/packages.nix`](https://github.com/dustinlyons/nixos-config/blob/main/modules/nixos/packages.nix)
 * [`modules/shared/packages/nix`](https://github.com/dustinlyons/nixos-config/blob/main/modules/shared/packages.nix)
 
 ### 7. Review your shell configuration
@@ -274,7 +275,7 @@ Finally, alter your system with this command:
 nix run .#build-switch
 ```
 > [!CAUTION]
-> `~/.zshrc` will be replaced with the [`zsh` configuration](https://github.com/dustinlyons/nixos-config/blob/main/templates/starter/modules/shared/home-manager.nix#L8) from this repository. Make edits here first if you'd like.
+> `~/.zshrc` will be replaced with the [`zsh` configuration](https://github.com/dustinlyons/nixos-config/blob/main/templates/starter/modules/shared/home-manager.nix#L8) from this repository. Make sure this is what you want.
 
 ## For NixOS
 This configuration supports both `x86_64` and `aarch64` platforms.
@@ -356,7 +357,7 @@ On first boot at the login screen:
 - Go back to the login screen: `Ctrl-Alt-F7`
 
 # How to create secrets
-To create a new secret `secret.age`, first [create a `secrets.nix` file](https://github.com/ryantm/agenix#tutorial) at the root of your [`nix-secrets`](https://github.com/dustinlyons/nix-secrets-example) repository. 
+To create a new secret `secret.age`, first [create a `secrets.nix` file](https://github.com/ryantm/agenix#tutorial) at the root of your [`nix-secrets`](https://github.com/dustinlyons/nix-secrets-example) repository. Use this code:
 
 > [!NOTE]
 > `secrets.nix` is interpreted by the imperative `agenix` commands to pick the "right" keys for your secrets.
@@ -376,21 +377,29 @@ in
   "secret.age".publicKeys = [ user1 system1 ];
 }
 ```
-Now that we've configured `agenix` with our `secrets.nix`, it's time to create our first secret. Run the command below. Note, it assumes your SSH private key is in `~/.ssh/` or you can provide the `-i` flag with a path to your `id_ed25519` key. 
+Values for `user1` should be your public key, or if you prefer to have keys attached to hosts, use the `system1` declaration. 
+
+Now that we've configured `agenix` with our `secrets.nix`, it's time to create our first secret. 
+
+Run the command below. 
+
 ```
 EDITOR=vim nix run github:ryantm/agenix -- -e secret.age
 ```
+
 This opens an editor to accept, encrypt, and write your secret to disk. 
 
-Commit the file to your [`nix-secrets`](https://github.com/dustinlyons/nix-secrets-example) repo and add a reference in the `secrets.nix` of your [`nix-secrets`](https://github.com/dustinlyons/nix-secrets-example) repository. References look like
-```
-{
-  "secret.age".publicKeys = [ user1 system1 ];
-}
-```
-where `"secret.age"` is your new filename. Now we have two files: `secrets.nix` and our `secret.age`. Let me show you.
+The command will look up the public key for `secret.age`, defined in your `secrets.nix`, and check for its private key in `~/.ssh/.`
 
-## Example
+> To override the SSH path, provide the `-i` flag with a path to your `id_ed25519` key.
+
+Write your secret in the editor, save, and commit the file to your [`nix-secrets`](https://github.com/dustinlyons/nix-secrets-example) repo. 
+
+Now we have two files: `secrets.nix` and our `secret.age`. 
+
+Here's a more step-by-step example:
+
+## Secrets Example
 Let's say I wanted to create a new secret to hold my Github SSH key. 
 
 I would `cd` into my [`nix-secrets`](https://github.com/dustinlyons/nix-secrets-example) repo directory, verify the `agenix` configuration (named `secrets.nix`) exists, then run 
@@ -436,13 +445,17 @@ nix run .#build-switch
 nix flake update
 ```
 
-## Compatibility and Testing
+# Compatibility and Feedback
+## Platforms
 This configuration has been tested and confirmed to work on the following platforms:
 - Newer M1/M2/M3 Apple Silicon Macs
 - Older x86_64 (Intel) Macs
 - Bare metal x86_64 PCs
 - NixOS VMs inside VMWare on macOS
 - macOS Sonoma VMs inside Parallels on macOS
+
+## Feedback and Questions
+Have feedback or questions? Feel free to use the [discussion forum](https://github.com/dustinlyons/nixos-config/discussions).
 
 ## Contributing
 Interested in contributing to this project? Here's how you can help:
@@ -451,21 +464,15 @@ Interested in contributing to this project? Here's how you can help:
 
 - **Reporting Bugs**: If you encounter bugs or issues, please help by reporting them. Open a GitHub Issue and include as much detail as possible: what you were doing when the bug occurred, steps to reproduce the issue, and any relevant logs or error messages.
 
-## Feedback and Questions
-Have feedback or questions? Feel free to use the [discussion forum](https://github.com/dustinlyons/nixos-config/discussions).
-
-## License
-This project is released under the [BSD-3-Clause license](https://github.com/dustinlyons/nixos-config/blob/main/LICENSE).
-
-## Appendix
-### Why Nix Flakes
+# Appendix
+## Why Nix Flakes
 **Reasons to jump into flakes and skip `nix-env`, Nix channels, etc**
 - Flakes work just like other package managers you already know: `npm`, `cargo`, `poetry`, `composer`, etc. Channels work more like traditional Linux distributions (like Ubuntu), which most devs don't know.
 - Flakes encapsulate not just project dependencies, but Nix expressions, Nix apps, and other configurations in a single file. It's all there in a single file. This is nice.
 - Channels lock all packages to one big global `nixpkgs` version. Flakes lock each individual package to a version, which is more precise and makes it much easier to manage overall.
 - Flakes have a growing ecosystem (see [Flake Hub](https://flakehub.com/) or [Dev Env](https://devenv.sh/)), so you're future-proofing yourself.
   
-### NixOS Components
+## NixOS Components
 
 | Component                   | Description                                     | 
 | --------------------------- | :---------------------------------------------  |
@@ -481,11 +488,14 @@ This project is released under the [BSD-3-Clause license](https://github.com/dus
 | **Image Viewer**            | feh                                             |
 | **Screenshot Software**     | flameshot                                       |
 
-### Stars
+## License
+This project is released under the [BSD-3-Clause license](https://github.com/dustinlyons/nixos-config/blob/main/LICENSE).
+
+## Support
+[Buy me a coffee](https://www.buymeacoffee.com/dustinlyons1) or [follow me on Github](https://github.com/dustinlyons).
+
+## Stars
 
 > "All we have to decide is what to do with the time that is given us." - J.R.R. Tolkien
 
 [![Star History Chart](https://api.star-history.com/svg?repos=dustinlyons/nixos-config&type=Date)](https://star-history.com/#dustinlyons/nixos-config&Date)
-
-### Support
-[Buy me a coffee](https://www.buymeacoffee.com/dustinlyons1) or [follow me on Github](https://github.com/dustinlyons).
