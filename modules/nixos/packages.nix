@@ -5,8 +5,6 @@ let shared-packages = import ../shared/packages.nix { inherit pkgs; }; in
 shared-packages ++ [
 
   # Security and authentication
-#  _1password-gui
-#  yubikey-agent
   keepassxc
 
   # App and package management
@@ -18,13 +16,10 @@ shared-packages ++ [
   # Media and design tools
   gimp
   vlc
-mpv
+  mpv
   wineWowPackages.stable
   fontconfig
   font-manager
-
-  # Printers and drivers
-#  brlaser # printer driver
 
   # Calculators
   bc # old school calculator
@@ -36,13 +31,10 @@ mpv
 
   # Messaging and chat applications
   discord
-  hexchat # Chat
   fractal # Matrix.org messaging app
-  #tdesktop # telegram desktop
 
   # Testing and development tools
   beekeeper-studio
-#  cypress # Functional testing framework using headless chrome
   chromedriver
   direnv
   rofi
