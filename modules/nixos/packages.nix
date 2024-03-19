@@ -48,7 +48,7 @@ mpv
   direnv
   rofi
   rofi-calc
-  rnix-lsp # lsp-mode for nix
+ 
   qmk
   postgresql
   libusb1 # for Xbox controller
