@@ -35,7 +35,6 @@ mpv
   pavucontrol # Pulse audio controls
 
   # Messaging and chat applications
-  cider # Apple Music on Linux
   discord
   hexchat # Chat
   fractal # Matrix.org messaging app
@@ -83,7 +82,6 @@ mpv
   # Other utilities
   yad # I use yad-calendar with polybar
   xdotool
-  google-chrome
 firefox
   # PDF viewer
   zathura
@@ -91,6 +89,4 @@ firefox
   # Music and entertainment
   spotify
 
-  # VR
-  immersed-vr
 ]
