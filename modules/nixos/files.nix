@@ -63,16 +63,16 @@ let
 
       # Window configurations
       bspc config border_width         0
-      bspc config window_gap          16
+      bspc config window_gap          2
       bspc config split_ratio          0.52
       bspc config borderless_monocle   true
       bspc config gapless_monocle      true
 
       # Padding outside of the window
-      bspc config top_padding            60
-      bspc config bottom_padding         60
-      bspc config left_padding           60
-      bspc config right_padding          60
+      bspc config top_padding            0
+      bspc config bottom_padding         0
+      bspc config left_padding           0
+      bspc config right_padding          0
 
       # Move floating windows
       bspc config pointer_action1 move
@@ -102,7 +102,7 @@ let
       # Desktop 1
       # Email, Calendar, News, IDE
       bspc rule -a Google-chrome -o desktop='^1'
-      /etc/profiles/per-user/dustin/bin/google-chrome-stable "https://www.fastmail.com" "https://calendar.google.com/calendar/u/0/r" "https://www.techmeme.com"  &!
+      /etc/profiles/per-user/oxef/bin/google-chrome-stable "https://www.fastmail.com" "https://calendar.google.com/calendar/u/0/r" "https://www.techmeme.com"  &!
 
       sleep 1
       bspc rule -a PHPStorm -o desktop='^1'
@@ -128,14 +128,14 @@ let
       # Desktop 3
       # ChatGPT
       bspc rule -a Google-chrome -o desktop='^3'
-      /etc/profiles/per-user/dustin/bin/google-chrome-stable --new-window "https://chat.openai.com" &!
+      /etc/profiles/per-user/oxef/bin/google-chrome-stable --new-window "https://chat.openai.com" &!
 
       sleep .5
 
       # Desktop 4
       # Apple Music
-      bspc rule -a Cider -o desktop='^4'
-      /etc/profiles/per-user/dustin/bin/cider &!
+      bspc rule -a spotify -o desktop='^4'
+      /etc/profiles/per-user/oxef/bin/spotify &!
 
       sleep 1
     '';
