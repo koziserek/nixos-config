@@ -177,9 +177,19 @@ mkdir -p nixos-config && cd nixos-config && nix flake --extra-experimental-featu
 find apps/$(uname -m | sed 's/arm64/aarch64/')-darwin -type f \( -name apply -o -name build -o -name build-switch -o -name create-keys -o -name copy-keys -o -name check-keys \) -exec chmod +x {} \;
 ```
 
+<<<<<<< HEAD
 ### 5. Apply your current user info
 Run this Nix command to replace stub values with your system properties, username, full name, and email.
 > Email is only used in the `git` configuration.
+=======
+### 4. Set the executable flag on apps
+```sh
+chmod +x apps/aarch64-darwin/apply && chmod +x apps/aarch64-darwin/dryRun chmod +x apps/aarch64-darwin/build 
+```
+
+### 5. Apply your current user info
+Run this Nix app to replace stub values with your username, full name, and email.
+>>>>>>> upstream/dustinlyons-patch-1
 ```sh
 nix run .#apply
 ```
@@ -197,6 +207,7 @@ You can search for packages on the [official NixOS website](https://search.nixos
 * [`modules/darwin/packages.nix`](https://github.com/dustinlyons/nixos-config/blob/main/modules/darwin/packages.nix)
 * [`modules/shared/packages/nix`](https://github.com/dustinlyons/nixos-config/blob/main/modules/shared/packages.nix)
 
+<<<<<<< HEAD
 ### 7. Review your shell configuration
 Add anything from your existing `~/.zshrc`, or just review the new configuration.
 
@@ -213,6 +224,16 @@ In Github, create a private [`nix-secrets`](https://github.com/dustinlyons/nix-s
 
 #### 8b. Install keys
 Before generating your first build, these keys must exist in your `~/.ssh` directory. Don't worry, I provide a few commands to help you.
+=======
+### 7. Optional: Setup secrets
+If you are using the starter with secrets, there are a few additional steps.
+
+#### 7a. Create a private Github repo to hold your secrets
+In Github, create a private [`nix-secrets`](https://github.com/dustinlyons/nix-secrets-example) repository. You'll enter this name during installation.
+
+#### 7b. Install keys
+Before generating your first build, these keys must exist in your `~/.ssh` directory. Don't worry, we provide a few commands to help you.
+>>>>>>> upstream/dustinlyons-patch-1
 
 | Key Name            | Platform         | Description                           | 
 |---------------------|------------------|---------------------------------------|
@@ -245,8 +266,27 @@ If you're rolling your own, just check they are installed correctly.
 nix run .#check-keys
 ```
 
+<<<<<<< HEAD
 ### 9. Install configuration
 Ensure the build works before deploying the configuration, run:
+=======
+### 8. Install configuration
+First-time installations require you to move the current `/etc/nix/nix.conf` out of the way.
+```sh
+[ -f /etc/nix/nix.conf ] && sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
+```
+
+If you're using a git repository, only files in the working tree will be copied to the [Nix Store](https://zero-to-nix.com/concepts/nix-store). 
+
+So it's imperative you run `git add .`.
+
+Then, you can build the system closure but not switch to the new generation with a dry run:
+```sh
+nix run .#dryRun
+```
+
+Finally, to both build and install the configuration, run:
+>>>>>>> upstream/dustinlyons-patch-1
 ```sh
 nix run .#build
 ```
