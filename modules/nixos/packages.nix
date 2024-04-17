@@ -39,7 +39,6 @@ shared-packages ++ [
   direnv
   rofi
   rofi-calc
- 
   qmk
   postgresql
   libusb1 # for Xbox controller
@@ -66,7 +65,6 @@ shared-packages ++ [
   libnotify
   ledger-live-desktop
   playerctl # Control media players from command line
-  pinentry-curses
   pcmanfm # Our file browser
   sqlite
   xdg-utils

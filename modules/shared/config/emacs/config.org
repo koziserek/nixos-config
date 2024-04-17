@@ -9,7 +9,7 @@ Why an ~org~ file? My Emacs config is large, and this enables me to improve the 
 
 This is the main configuration, but one more init file also exists, ~init.el~ , that bootstraps ~org-mode~ before this file is interpreted. That's defined [[https://github.com/dustinlyons/nixos-config/blob/main/modules/shared/files.nix#L56][here]].
 
-/Each block of code below is the actual Emacs configuration./ Formally, this style of configuration is named [[https://en.wikipedia.org/wiki/Literate_programming]["literate programming"]].
+/Each block of code below is the actual Emacs configuration./ Formally, this style of configuration is called [[https://en.wikipedia.org/wiki/Literate_programming]["literate programming"]].
 
 ** Personal Information
 Just me!
@@ -775,7 +775,6 @@ These are templates used to create new notes.
      :if-new (file+head "%<%Y-%m-%d>.org"
                         (lambda () (concat ":PROPERTIES:\n:ID:       " (org-id-new) "\n:END:\n"
                                            "#+TITLE: %<%Y-%m-%d>\n#+filetags: Daily \n" ; Added space here
-                                           "[[id:F355F26D-E4E5-4CF5-99EA-E77846D47FAF][Workflow]]\n\n"
                                            "* Log\n"))))))
 #+END_SRC
 

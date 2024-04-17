@@ -11,48 +11,52 @@ This repository contains configuration for a general-purpose development environ
 
 I use it daily on my 🧑🏻‍💻 M1 Macbook Pro and an x86 PC in my home office. It also runs as a VM on your Mac. Many others have reported that it's working for them too.
 
-Check out the starter templates and step-by-step commands below to get started!
+Check out the step-by-step commands below to get started!
 
 ## Table of Contents
-- [Overview](#overview)
-- [Layout](#layout)
-- [Features](#features)
-- [Disclaimer](#disclaimer)
-- [Videos](#videos)
-  - [macOS](#macos)
-    - [Updating dependencies with one command](#updating-dependencies-with-one-command)
-    - [Instant Emacs 29 thanks to daemon mode](#instant-emacs-29-thanks-to-daemon-mode)
-  - [NixOS](#nixos)
-- [Installing](#installing)
-  - [For macOS (March 2024)](#for-macos-march-2024)
-    - [Install dependencies](#1-install-dependencies)
-    - [Install Nix](#2-install-nix)
-    - [Initialize a starter template](#3-initialize-a-starter-template)
-    - [Apply your current user info](#4-apply-your-current-user-info)
-    - [Decide what packages to install](#5-decide-what-packages-to-install)
-    - [Review your shell configuration](#7-review-your-shell-configuration)
-    - [Optional: Setup secrets](#8-optional-setup-secrets)
-    - [Install configuration](#9-install-configuration)
-    - [Make changes](#10-make-changes)
-  - [For NixOS](#for-nixos)
-    - [Burn the latest ISO](#1-burn-the-latest-iso)
-    - [Optional: Setup secrets](#2-optional-setup-secrets)
-    - [Install configuration](#3-install-configuration)
-    - [Set user password](#4-set-user-password)
-- [How to Create Secrets](#how-to-create-secrets)
-- [Deploying Changes to Your System](#deploying-changes-to-your-system)
-  - [For all platforms](#for-all-platforms)
-  - [Update Dependencies](#update-dependencies)
-- [Compatibility and Feedback](#compatibility-and-feedback)
-  - [Platforms](#platforms)
-  - [Contributing](#contributing)
-  - [Feedback and Questions](#feedback-and-questions)
-  - [License](#license)
-- [Appendix](#appendix)
-  - [Why Nix Flakes](#why-nix-flakes)
-  - [NixOS Components](#nixos-components)
-  - [Support](#support)
-  - [Stars](#stars)
+- [Nix Config for macOS + NixOS](#nix-config-for-macos--nixos)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Layout](#layout)
+  - [Features](#features)
+  - [Disclaimer](#disclaimer)
+  - [Videos](#videos)
+    - [macOS](#macos)
+      - [Updating dependencies with one command](#updating-dependencies-with-one-command)
+      - [Instant Emacs 29 thanks to daemon mode](#instant-emacs-29-thanks-to-daemon-mode)
+    - [NixOS](#nixos)
+  - [Installing](#installing)
+    - [For macOS (April 2024)](#for-macos-april-2024)
+      - [1. Install dependencies](#1-install-dependencies)
+      - [2. Install Nix](#2-install-nix)
+      - [3. Initialize a starter template](#3-initialize-a-starter-template)
+      - [4. Make apps executable](#4-make-apps-executable)
+      - [5. Apply your current user info](#5-apply-your-current-user-info)
+      - [6. Decide what packages to install](#6-decide-what-packages-to-install)
+      - [7. Review your shell configuration](#7-review-your-shell-configuration)
+      - [8. Optional: Setup secrets](#8-optional-setup-secrets)
+      - [9. Install configuration](#9-install-configuration)
+      - [10. Make changes](#10-make-changes)
+    - [For NixOS](#for-nixos)
+      - [1. Burn and use the latest ISO](#1-burn-and-use-the-latest-iso)
+      - [2. Optional: Setup secrets](#2-optional-setup-secrets)
+      - [3. Install configuration](#3-install-configuration)
+      - [4. Set user password](#4-set-user-password)
+  - [How to Create Secrets](#how-to-create-secrets)
+  - [Making Changes](#making-changes)
+      - [Development workflow](#development-workflow)
+      - [Trying packages](#trying-packages)
+  - [Compatibility and Feedback](#compatibility-and-feedback)
+    - [Platforms](#platforms)
+    - [Contributing](#contributing)
+    - [Feedback and Questions](#feedback-and-questions)
+    - [License](#license)
+  - [Appendix](#appendix)
+    - [Why Nix Flakes](#why-nix-flakes)
+    - [NixOS Components](#nixos-components)
+    - [Support](#support)
+    - [Stars](#stars)
+
 
 
 ## Layout
@@ -88,7 +92,7 @@ Installing Nix on macOS will create an entirely separate volume. It will exceed 
 Some folks don't like this. If this is you, turn back now!
 
 > [!NOTE]
-> Don't worry; you can always [uninstall](https://github.com/DeterminateSystems/nix-installer#uninstalling) Nix later.
+> Don't worry, you can always [uninstall](https://github.com/DeterminateSystems/nix-installer#uninstalling) Nix later.
 
 ## Videos
 ### macOS
@@ -108,7 +112,7 @@ https://github.com/dustinlyons/nixos-config/assets/1292576/d96f59ce-f540-4f14-bc
 
 https://github.com/dustinlyons/nixos-config/assets/1292576/fa54a87f-5971-41ee-98ce-09be048018b8
 
-# Installing
+## Installing
 > [!IMPORTANT]
 > Note: Nix 2.18 currently [has a bug](https://github.com/NixOS/nix/issues/9052) that impacts this repository.
 > 
@@ -122,7 +126,7 @@ https://github.com/dustinlyons/nixos-config/assets/1292576/fa54a87f-5971-41ee-98
 > nix copy --from https://cache.nixos.org /nix/store/52k8rqihijagzc2lkv17f4lw9kmh4ki6-gnugrep-3.11-info
 > ```
 
-## For macOS (March 2024)
+## For macOS (April 2024)
 This configuration supports both Intel and Apple Silicon Macs.
 
 ### 1. Install dependencies
@@ -320,8 +324,8 @@ nix run .#build-switch
 ## For NixOS
 This configuration supports both `x86_64` and `aarch64` platforms.
 
-### 1. Burn the latest ISO
-Download and burn [the minimal ISO image](https://nixos.org/download.html) to a USB, or create a new VM with the ISO as base.
+### 1. Burn and use the latest ISO
+Download and burn [the minimal ISO image](https://nixos.org/download.html) to a USB, or create a new VM with the ISO as base. Boot the installer.
 > If you're building a VM on an Apple Silicon Mac, choose [64-bit ARM](https://channels.nixos.org/nixos-23.05/latest-nixos-minimal-aarch64-linux.iso).
 
 **Quick Links**
@@ -329,7 +333,6 @@ Download and burn [the minimal ISO image](https://nixos.org/download.html) to a 
 * [64-bit Intel/AMD](https://channels.nixos.org/nixos-23.05/latest-nixos-minimal-x86_64-linux.iso)
 * [64-bit ARM](https://channels.nixos.org/nixos-23.05/latest-nixos-minimal-aarch64-linux.iso)
 
-Boot the installer.
 ### 2. Optional: Setup secrets
 If you are using the starter with secrets, there are a few additional steps.
 
@@ -365,8 +368,7 @@ sudo nix run --extra-experimental-features 'nix-command flakes' github:dustinlyo
 ```
 
 ### 3. Install configuration
-#### Run command
-After the keys are in place, you're good to go. Run either of these commands:
+#### Pick your template
 
 > [!IMPORTANT]
 > For Nvidia cards, select the second option, `nomodeset`, when booting the installer, or you will see a blank screen.
@@ -396,7 +398,7 @@ On first boot at the login screen:
 - Set the user password with `passwd <user>`
 - Go back to the login screen: `Ctrl-Alt-F7`
 
-# How to create secrets
+## How to create secrets
 To create a new secret `secret.age`, first [create a `secrets.nix` file](https://github.com/ryantm/agenix#tutorial) at the root of your [`nix-secrets`](https://github.com/dustinlyons/nix-secrets-example) repository. Use this code:
 
 > [!NOTE]
@@ -469,24 +471,31 @@ Finally, I'd commit all changes to the [`nix-secrets`](https://github.com/dustin
 
 The secret is now ready to use. Here's an [example](https://github.com/dustinlyons/nixos-config/blob/3b95252bc6facd7f61c6c68ceb1935481cb6b457/nixos/secrets.nix#L28) from my configuration. In the end, this creates a symlink to a decrypted file in the Nix Store that reflects my original file.
 
-# Deploying changes to your system
+## Making changes
 With Nix, changes to your system are made by 
 - editing your system configuration
 - building the [system closure](https://zero-to-nix.com/concepts/closures)
 - creating [a new generation](https://nixos.wiki/wiki/Terms_and_Definitions_in_Nix_Project#generation) based on this closure and switching to it
 
-## For all platforms
+This is all wrapped up in the `build-switch` run command.
+
+### Development workflow
+So, in general, the workflow for managing your environment will look like
+- make some changes to the configuration (or just update flake inputs with `nix flake update`)
+- run `nix run .#build-switch`
+- watch Nix, `nix-darwin`, `home-manager`, etc do their thing
+- go about your way and benefit from a declarative environment
+  
+### Trying packages
+For quickly trying a package without installing it, I usually run
 ```sh
-nix run .#build-switch
+nix shell nixpkgs#hello
 ```
 
-## Update dependencies
-```sh
-nix flake update
-```
+where `hello` is the package name from [nixpkgs](https://search.nixos.org/packages).
 
-# Compatibility and Feedback
-## Platforms
+## Compatibility and Feedback
+### Platforms
 This configuration has been tested and confirmed to work on the following platforms:
 - Newer M1/M2/M3 Apple Silicon Macs
 - Older x86_64 (Intel) Macs
@@ -494,25 +503,25 @@ This configuration has been tested and confirmed to work on the following platfo
 - NixOS VMs inside VMWare on macOS
 - macOS Sonoma VMs inside Parallels on macOS
 
-## Feedback and Questions
+### Feedback and Questions
 Have feedback or questions? Feel free to use the [discussion forum](https://github.com/dustinlyons/nixos-config/discussions).
 
-## Contributing
+### Contributing
 Interested in contributing to this project? Here's how you can help:
 
 - **Code Contributions**: If you're interested in contributing code, please start by looking at open issues or feature requests. Fork the repository, make your changes, and submit a pull request. Make sure your code adheres to the existing style. For significant changes, consider opening an issue for discussion before starting work.
 
 - **Reporting Bugs**: If you encounter bugs or issues, please help by reporting them. Open a GitHub Issue and include as much detail as possible: what you were doing when the bug occurred, steps to reproduce the issue, and any relevant logs or error messages.
 
-# Appendix
-## Why Nix Flakes
+## Appendix
+### Why Nix Flakes
 **Reasons to jump into flakes and skip `nix-env`, Nix channels, etc**
 - Flakes work just like other package managers you already know: `npm`, `cargo`, `poetry`, `composer`, etc. Channels work more like traditional Linux distributions (like Ubuntu), which most devs don't know.
 - Flakes encapsulate not just project dependencies, but Nix expressions, Nix apps, and other configurations in a single file. It's all there in a single file. This is nice.
 - Channels lock all packages to one big global `nixpkgs` version. Flakes lock each individual package to a version, which is more precise and makes it much easier to manage overall.
 - Flakes have a growing ecosystem (see [Flake Hub](https://flakehub.com/) or [Dev Env](https://devenv.sh/)), so you're future-proofing yourself.
   
-## NixOS Components
+### NixOS Components
 
 | Component                   | Description                                     | 
 | --------------------------- | :---------------------------------------------  |
@@ -528,13 +537,13 @@ Interested in contributing to this project? Here's how you can help:
 | **Image Viewer**            | feh                                             |
 | **Screenshot Software**     | flameshot                                       |
 
-## License
+### License
 This project is released under the [BSD-3-Clause license](https://github.com/dustinlyons/nixos-config/blob/main/LICENSE).
 
-## Support
+### Support
 [Buy me a coffee](https://www.buymeacoffee.com/dustinlyons1) or [follow me on Github](https://github.com/dustinlyons).
 
-## Stars
+### Stars
 
 > "All we have to decide is what to do with the time that is given us." - J.R.R. Tolkien
 
