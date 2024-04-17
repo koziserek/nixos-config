@@ -89,7 +89,7 @@ let user = "jakub";
 
       # Turn Caps Lock into Ctrl
       xkb = {
-        layout = "us";
+        layout = "pl";
         options = "ctrl:nocaps";
       };
     };

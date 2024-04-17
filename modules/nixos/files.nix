@@ -107,23 +107,12 @@ let
       sleep 1
       bspc rule -a PHPStorm -o desktop='^1'
       /run/current-system/sw/bin/phpstorm &!
-
-      # Wait for Emacs daemon to be ready
-      while ! /run/current-system/sw/bin/emacsclient -e '(progn)' &>/dev/null; do
-      sleep 1
-      done
-      notify-send 'Emacs daemon started.'
-
+      
       # Desktop 2
       # Terminal, Emacs (magit)
       bspc rule -a Alacritty -o desktop='^2'
-      /etc/profiles/per-user/dustin/bin/alacritty -e sh -c 'tmux attach || tmux new-session' &
+      /etc/profiles/per-user/oxef/bin/alacritty -e sh -c 'tmux attach || tmux new-session' &
 
-      sleep 1
-      bspc rule -a Emacs -o desktop='^2'
-      /run/current-system/sw/bin/emacsclient -c &!
-
-      sleep .5
 
       # Desktop 3
       # ChatGPT

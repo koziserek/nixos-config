@@ -20,6 +20,7 @@ with pkgs; [
   openssh
   pandoc
   sqlite
+  tailscale
   wget
   zip
 
@@ -36,7 +37,7 @@ with pkgs; [
   #awscli2
   #flyctl
   #google-cloud-sdk
-  go
+  #go
   #gopls
   #ngrok
   ssm-session-manager-plugin
@@ -82,8 +83,6 @@ with pkgs; [
   htop
   hunspell
   iftop
-  jetbrains-mono
-  jetbrains.phpstorm
   jq
   ripgrep
   #slack

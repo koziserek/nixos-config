@@ -18,7 +18,7 @@ _: {
               };
             };
             root = {
-              start = "901G";  # Start immediately after Windows partition.
+              start = "190G";  # Start immediately after Windows partition.
               size = "100%";  # Takes the remaining half of the disk space.
               content = {
                 type = "filesystem";

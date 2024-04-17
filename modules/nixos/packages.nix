@@ -73,6 +73,7 @@ shared-packages ++ [
   yad # I use yad-calendar with polybar
   xdotool
 firefox
+google-chrome-stable
   # PDF viewer
   zathura
 

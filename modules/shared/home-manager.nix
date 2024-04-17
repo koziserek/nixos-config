@@ -57,15 +57,7 @@ let name = "Jakub Koziserek";
       export ALTERNATE_EDITOR=""
       export EDITOR="nvim"
       export VISUAL="gvim"
-#      e() {
- #         emacsclient -t "$@"
-  #    }
 
-      # Laravel Artisan
- #     alias art='php artisan'
-
-      # PHP Deployer
- #     alias deploy='dep deploy'
 
       # Use difftastic, syntax-aware diffing
       alias diff=difft
